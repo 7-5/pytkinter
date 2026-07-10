@@ -1,0 +1,26 @@
+﻿from tkinter import *
+
+# check button
+
+def display():
+	if (x.get()==1):
+		print("agree")
+	else:
+		print("wooo")
+
+window = Tk()  
+
+x= IntVar() #StringVar BooleanVar
+
+check_button= Checkbutton(
+window,
+text="im feeling luckly",
+variable=x,onvalue=1,offvalue=0, 
+command=display,
+# other customiz but holding it has um weird thing where it flashes
+# activeforeground/background. you know how it is.
+
+)
+check_button.pack()
+
+window.mainloop()

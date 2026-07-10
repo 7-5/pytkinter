@@ -1,0 +1,14 @@
+﻿from tkinter import *
+
+def dothing(event):
+	#print("thing is" + event.keysym)
+	label.config(text=event.keysym)
+window = Tk()
+
+#window.bind(event,function)
+window.bind("<w>",dothing) #Up, Return, Dow n # if pressed w it ll dothing <Key> for any key. BackSpace Escape
+
+label=Label(window)
+label.pack()
+
+window.mainloop()

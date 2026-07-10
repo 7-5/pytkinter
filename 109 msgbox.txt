@@ -1,0 +1,19 @@
+﻿from tkinter import * # this one needs messagebox
+
+# mmessagebox
+
+def click():
+	messagebox.showinfo(title="popo",message="holy fuck stewie") 
+	# showinfo (!), showwarning /!\, showerror (X)
+	messagebox.askokcancel()-> returns True or False
+	if elselersin.
+	#askokcancel TF, askretrycancel TF, askyesno TF, (?)
+	#askquestion(title=,message=) this returns "yes" or "no"
+	#askyesnocancel(title,message,) returns True False None...
+	(title, message, icon=)#warning info error
+
+window = Tk()  
+
+botton = Button(window,command=click,text="nukecodes")
+
+window.mainloop()

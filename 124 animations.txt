@@ -1,0 +1,31 @@
+﻿from tkinter import *
+import time
+
+#animating image on canvas
+
+WI,HE=500,500 #just setting constants for widthheight
+vx,vy=3,2
+
+window = Tk()
+canvas=Canvas(window,width=WI,HE)
+canvas.pack()
+
+imge=PhotoImage(file="yeryuzu.png")
+myimge=canvas.create_image(0,0,image=imge,anchor=NW)#northwest
+img=PhotoImage(file="ufo.png")
+myimg=canvas.create_image(0,0,image=img,anchor=NW)#northwest
+
+iwi,ihe=img.width(),img.height()
+
+while True:
+	coordinates = canvas.coords(myimg)
+	print(coordinates)
+	if(coordinates[0]>=WI-iwi or coordinates[0]<0):
+		vx*=-1
+	if(coordinates[1]>=HE-ihe or coordinates[0]<0):
+		vy*=-1
+	canvas.move(my_image,vx,vy)
+	window.update()
+	time.sleep(0.01)
+
+window.mainloop()

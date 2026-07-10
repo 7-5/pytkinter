@@ -1,0 +1,28 @@
+﻿from tkinter import *
+
+# label = an area widget that holds that holds text and/or an image within a window
+
+window = Tk()  
+
+photo = PhotoImage(file="C:\\Users\\bruh\\Desktop\\file.png") # or if in folder it can just be file.png
+
+label = Label(
+window,
+text="pee",font=("calibri",11,"bold"),
+fg="green", # foreground, font color
+bg="black", #backgrond
+relief=RAISED, # border. SUNKEN
+bd=10, border thickness
+padx=20, #20 pixels space on border and text
+pady=20, #
+image=photo, #adds image. over text.
+compound="bottom", #image is on down
+
+)
+label.pack() # (top center), or label.place(x=0,y=0) to top left. no size specification on window makes the window shrink to it, and resizing it you will see the label didnt change size.
+
+window.mainloop()
+
+
+
+window

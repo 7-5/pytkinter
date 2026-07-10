@@ -1,0 +1,16 @@
+﻿from tkinter import *
+
+def dothing(event):
+	#print("thing is" + event.keysym)
+	label.config(text=event.keysym)
+	event.keysym yerine event.x, mouse konumu
+window = Tk()
+
+#window.bind(event,function)
+window.bind("<Button-1>",dothing)
+window.bind("<Button-3>",dothing)
+window.bind("<Enter>",dothing) # the moment you enter window with mouse, enterkey is Return. Leave exists.
+window.bind("<Motion>",dothing) # where the mouse moved.
+
+
+window.mainloop()

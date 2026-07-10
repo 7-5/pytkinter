@@ -1,0 +1,27 @@
+﻿from tkinter import *
+
+# listbox. select items in its own container
+
+def submit():
+	print listbox.get(listbox.curselection()) 
+
+window = Tk()  
+
+listbox= Listbox(window,
+# you know the drill
+width,height
+selectmode=MULTIPLE -> it ll give um "0 1 2 3 4 5" it needs some shit you can figure out aga
+)
+
+listbox.pack()
+
+listbox.insert(1,"pizza")
+listbox.insert(2,"pasta")
+listbox.insert(3,"garlick bred")
+listbox.insert(4,"soup")
+listbox.delete(listbox.curselection())
+listbox.config(height=listbox.size()) # shrink dynamicly
+
+submitButton=Button(window,text="dunmit", command=submit)
+
+window.mainloop()

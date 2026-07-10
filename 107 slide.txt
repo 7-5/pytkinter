@@ -1,0 +1,27 @@
+﻿from tkinter import *
+
+# scale
+
+def submit():
+	print(scale.get())
+
+window = Tk()  
+
+scale= scale (window,from_=100,to=0,
+	length=600, #pixels
+	orient=VERTICAL, #or horizontal
+	font=
+	tickinterval=10 #numeric indicators for value
+	showvalue =0 #this will hide current value next to the slider
+	troughcolor= "red" # ---------------|---- colors of -
+	fg= font color
+	bg= backgroud also the slider | 
+	
+)
+scale.set((scale['from']-scale['to'])/2) 
+scale.pack()
+
+button= Button(window,text="sumit",command=submit)
+button.pack()
+
+window.mainloop()

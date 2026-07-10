@@ -1,0 +1,22 @@
+﻿from tkinter import *
+
+#textarea
+
+def submit():
+	input=text.get("1.0",END) #from start to end.....i dont even know bro.
+	print(input)
+
+window = Tk()  
+
+text= Text(window,
+	height=8 amount of characters its tall
+	width is also characters
+	padx pady for text to not touch edges
+	
+
+)
+text.pack()
+
+button = Button(text="click me",command=click)
+
+window.mainloop()

@@ -1,0 +1,18 @@
+﻿from tkinter import *
+what the fuck do you mean with no import tkinter
+
+windows vs widgets:
+widgets: gui elements: buttons, textboxes, labels, images.
+windows: serves as coontainer to hold or contain these widgets
+
+make window:
+
+window = Tk()  # instantiate an instance of a window
+
+window.geometry("1600x900")
+
+window.title("This is a title ok?")
+
+window.config(background="black") # can be #2468ac no alpha channel. you can do #ffa
+
+window.mainloop() # places window on comp screen, listen or events.

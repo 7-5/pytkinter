@@ -1,0 +1,47 @@
+﻿from tkinter import *
+
+#move image in window
+
+def moveup(event):
+	label.place(x=label.winfo_x(),x=label.winfo_y()-1)
+def movedown(event):
+	label.place(x=label.winfo_x(),x=label.winfo_y()+1)
+def moveleft(event):
+	label.place(x=label.winfo_x()-1,x=label.winfo_y())
+def moveright(event):
+	label.place(x=label.winfo_x()+1,x=label.winfo_y()-1)
+
+window = Tk()
+window.geometry("500x500")
+
+window.bind("w",moveup)
+window.bind("s",movedown)
+window.bind("a",moveleft)
+window.bind("d",moveright)
+
+img=PhotoImage(file="char.png")
+label=Label(window,image=img)
+label.place(x=0,y=0)
+
+window.mainloop()
+
+
+#########################################
+# move an image on a canvas
+
+from tkinter import *
+
+def move_up(event):
+	canvas.move(myimg,0,-1) #img,relativex,relativey
+
+window = Tk()
+
+window.bind(<w>,move_up)
+
+canvas= Canvas(window,width=500,height=500)
+canvas.pack()
+
+img=PhotoImage(file="racecar.png")
+myimg= canvas.create_image(0,0,image=img,anchor=NW)
+
+window.mainloop()

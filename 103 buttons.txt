@@ -1,0 +1,26 @@
+﻿from tkinter import *
+
+# button
+
+count=0
+
+def click():
+	global count
+	count+=1
+	print("count") # terminal
+window = Tk()  
+
+button= Button(window,
+text="click me",
+font=("Comic Sans",30),
+# all the other label customizer stuff. even images.
+activeforeground="green",
+activebackground="back",
+state=ACTIVE/DISABLED,
+
+command=click
+
+)
+buttton.pack()
+
+window.mainloop()

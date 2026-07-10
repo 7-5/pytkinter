@@ -1,0 +1,25 @@
+﻿from tkinter import *
+
+# radial
+
+food=["pizza","hammburger","hotdog"]
+
+def order():
+	print("you ordered"+food[x.get()]):
+
+window = Tk()  
+
+x=IntVar()
+
+for i in food: # it did the code with range i am doing this weird im bad
+	radiobutton= Radiobutton(window,text=i+" is what i chose"
+	variable=x,
+	value=index of i
+	indicatoron=0 # eliminate circle indicators and make it a push button. instead
+	)
+	radiobutton.pack(anchor=W) # "west"
+	command=order
+	
+window.mainloop()
+
+width and height also work btw

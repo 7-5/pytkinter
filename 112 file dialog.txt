@@ -1,0 +1,30 @@
+﻿from tkinter import *
+#needs filedialog
+
+def openfile():
+	filepath=filedialog.askopenfilename() returns "C:/Users/file.txt"
+	file = open(filepath,"r",encoding thing.) ->wait this is um... not need import os
+	file.close()
+	#askopenfilename(initialdir="C\\Users\\")
+	#askopenfilename(title="open file ok?)
+	#filetypes= (("text files","*.txt"),("all files","*.*"))
+	
+def savefile():
+	file=filedialog.asksaveasfile(defaultextension=".txt"
+	filetypes=[("text file",".txt"),("html",".html"),("allfiles",".*")]
+	initialdir="C:\\"
+	)
+	if file is None: return.
+	filetext=str(text.get("1.0",END))
+	file.write(filetext)
+	file.close()
+	
+window = Tk()  
+
+text=Text(window)
+text.pack()
+button = Button(text="click me",command=openfile)
+buttonz = Button(text="save me",command=savefile)
+button.pack()
+buttonz.pack()
+window.mainloop()

@@ -1,0 +1,17 @@
+﻿from tkinter import *
+
+def makewindow():
+	# two ways
+	# new_window=Tk()
+	new_window=TopLevel() : new window "on top" of other windows, linekd to a "bottom" window.
+	#if i close bottom one, top windows all close.
+	#if tk, nothing will happen
+	
+	window.destroy()	# this will close out of old window. better for tk
+	
+
+window = Tk()
+
+Button(window,text="makewindow",command=makewindow).pack()
+
+window.mainloop()

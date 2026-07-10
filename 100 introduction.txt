@@ -1,0 +1,25 @@
+﻿deadass dont know if i can keepup
+well python is good.
+i want to put code snippets for now
+especially the file things.
+do i have any understanding of computer graphics? no.
+
+import os
+thepath = "C:\\Users\\file.txt"
+a=""
+with open(thepath,"r",encoding="utf-8) as f:
+	a=f.read()
+	pass
+a=eval(a)
+with open(thepath,"w",encoding="utf-8) as f: # a for append exists rwxa+
+	a=f.write(some data wow)
+	pass
+
+shits cool.
+
+import time
+elapsed = time.time() - start # did you know its in float format? whoa
+
+os.system("cls") #cls is windows batch command to clear terminal. we are making ui. this is bat files and helps you run damn bat commands. its coool. cool. bool.
+
+its written as tkinter. tkinter. not tinker. you tin can. Tk inter.
