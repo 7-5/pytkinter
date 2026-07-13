@@ -1,6 +1,9 @@
 from tkinter import *
 import random
 import time
+import sys
+
+sys.setrecursionlimit(50000)
 
 # savegame
 savefile=""
@@ -57,19 +60,66 @@ def boardmaker(boardx,boardy):
         print("".join(i))
 
 def leftclick(event):
+    global firstclick, board, gwidth, gheight
+    if hasattr(event, "widget"):
+        cell = event.widget
+    else:
+        cell = event
+    if cell.cget("text")=="F":
+        return
+    if (cell.cget("relief")==FLAT):
+        return
+    r,c=cell.grid_info()["row"],cell.grid_info()["column"]
+    if firstclick and cell.cget("text")!="F":
+        firstclick=0
+        boardmaker(r,c)
+    cell.config(relief=FLAT,text=board[r][c]) # point where its opened
+    cellval=cell.cget("text")
+    if cellval not in "xF ":
+        colorations=["black","#0000ff","#008000","#ff0000","#000080","#800000","#008080","#000000","#808080","#c0cfb0"]
+        cell.config(fg=colorations[int(cellval)])
+    if (cellval==" "):
+        if r!=0 and c!=0:
+           if label_matrix[r-1][c-1].cget("relief")!=FLAT and label_matrix[r-1][c-1].cget("text")!="F":
+                leftclick(label_matrix[r-1][c-1])
+        if c!=gwidth-1:
+            if label_matrix[r][c+1].cget("relief")!=FLAT and label_matrix[r][c+1].cget("text")!="F":
+                leftclick(label_matrix[r][c+1])
+        if r!=gheight-1 and c!=0:
+            if label_matrix[r+1][c-1].cget("relief")!=FLAT and label_matrix[r+1][c-1].cget("text")!="F":
+                leftclick(label_matrix[r+1][c-1])        
+        if r!=0:
+            if label_matrix[r-1][c].cget("relief")!=FLAT and label_matrix[r-1][c].cget("text")!="F":
+                leftclick(label_matrix[r-1][c])
+        if r!=gheight-1 and c!=gwidth-1:
+            if label_matrix[r+1][c+1].cget("relief")!=FLAT and label_matrix[r+1][c+1].cget("text")!="F":
+                leftclick(label_matrix[r+1][c+1])        
+        if c!=0:
+            if label_matrix[r][c-1].cget("relief")!=FLAT and label_matrix[r][c-1].cget("text")!="F":
+                leftclick(label_matrix[r][c-1])
+        if r!=0 and c!=gwidth-1:
+            if label_matrix[r-1][c+1].cget("relief")!=FLAT and label_matrix[r-1][c+1].cget("text")!="F":
+                leftclick(label_matrix[r-1][c+1])        
+        if r!=gheight-1:
+            if label_matrix[r+1][c].cget("relief")!=FLAT and label_matrix[r+1][c].cget("text")!="F":
+                leftclick(label_matrix[r+1][c])        
+
+
+
+
+def rightclick(event):
     global firstclick
     global board
+    global gwidth
+    global gheight
     cell=event.widget
     info = cell.grid_info()
-    if firstclick:
-        firstclick=0
-        boardmaker(info["row"],info["column"])
-    cell.config(relief=FLAT,text=board[info["row"]][info["column"]])
+    if cell.cget("relief")!=FLAT:
+        if cell.cget("text")!="F":
+            cell.config(text="F",fg="#ff0000")
+        else:
+            cell.config(text=" ",fg="#ff0000")
 
-    
-def openspacearound():
-    global board
-    return
 
 window=Tk()
 
@@ -77,13 +127,17 @@ window.title("Minesweeper")
 icon=PhotoImage(file="minesweeper_mine.png")
 window.iconphoto(True,icon)
 
-gameframe=Frame(window,bg="#6fa615",relief=SUNKEN,bd=6)
+gameframe=Frame(window,bg="#c0c0c0",relief=SUNKEN,bd=6)
 gameframe.pack(side=TOP)
 gametime=Label(window,text=0,)
 
+label_matrix = [[None for _ in range(gwidth)] for _ in range(gheight)]
+
 for i in range(gheight):
     for j in range(gwidth):
-        cell=Label(gameframe,text=" ",font=("Courier New",12),bg="#c0c0c0",relief=RAISED)
+        cell=Label(gameframe,padx=6,text=" ",font=("Courier New",13,"bold"),bd=4,bg="#c0c0c0",relief=RAISED)
         cell.bind("<ButtonRelease-1>",leftclick)
+        cell.bind("<ButtonRelease-3>",rightclick)
         cell.grid(row=i,column=j)
+        label_matrix[i][j] = cell
 window.mainloop()
