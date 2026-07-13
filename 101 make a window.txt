@@ -8,10 +8,10 @@ windows: serves as coontainer to hold or contain these widgets
 make window:
 
 window = Tk()  # instantiate an instance of a window
-
 window.geometry("1600x900")
-
 window.title("This is a title ok?")
+icon=PhotoImage("minesweeper_mine.png")
+window.iconphoto(True,icon)
 
 window.config(background="black") # can be #2468ac no alpha channel. you can do #ffa
 
