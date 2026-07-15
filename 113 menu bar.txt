@@ -11,8 +11,8 @@ window = Tk()
 menubar= Menu(window)
 window.config(menu=menubar)
 
-filemenu= Menu(menubar)
-menubar.add_cascade(label="File",menu=filemenu,tearoff=0) -> dropdown is cascade
+filemenu= Menu(menubar,tearoff=0)
+menubar.add_cascade(label="File",menu=filemenu) -> dropdown is cascade
 filemenu.add_command(label="Open",command=functions)
 filemenu.add_command(label="Save",command=functional)
 filemenu.add_separator() # -----------------

@@ -22,7 +22,7 @@ def savegame():
 
 boardsettings=[[9,16,30,savefile["customwidth"]],[9,16,16,savefile["customheight"]],[10,40,99,savefile["custommines"]]]
 gwidth,gheight,gmine=boardsettings[0][savefile["difficulty"]],boardsettings[1][savefile["difficulty"]],boardsettings[2][savefile["difficulty"]]
-firstclick=1
+firstclick,firstminepress=1,1
 
 board = [[" " for __ in range(gwidth + 2)] for _ in range(gheight + 2)]
 
@@ -80,7 +80,7 @@ def leftclick(event):
         cell.config(fg=colorations[int(cellval)])
     if (cellval==" "):
         if r!=0 and c!=0:
-           if label_matrix[r-1][c-1].cget("relief")!=FLAT and label_matrix[r-1][c-1].cget("text")!="F":
+            if label_matrix[r-1][c-1].cget("relief")!=FLAT and label_matrix[r-1][c-1].cget("text")!="F":
                 leftclick(label_matrix[r-1][c-1])
         if c!=gwidth-1:
             if label_matrix[r][c+1].cget("relief")!=FLAT and label_matrix[r][c+1].cget("text")!="F":
@@ -104,24 +104,99 @@ def leftclick(event):
             if label_matrix[r+1][c].cget("relief")!=FLAT and label_matrix[r+1][c].cget("text")!="F":
                 leftclick(label_matrix[r+1][c])        
 
-
-
-
 def rightclick(event):
-    global firstclick
-    global board
-    global gwidth
-    global gheight
+    global firstclick,board,gwidth,gheight
     cell=event.widget
-    info = cell.grid_info()
     if cell.cget("relief")!=FLAT:
         if cell.cget("text")!="F":
             cell.config(text="F",fg="#ff0000")
         else:
             cell.config(text=" ",fg="#ff0000")
 
+def middleclick(event):
+    global firstclick, board, gwidth, gheight
+    if hasattr(event, "widget"):
+        cell = event.widget
+    else:
+        cell = event
+    if cell.cget("text")=="F":
+        return
+    if (cell.cget("relief")!=FLAT):
+        return
+    r,c=cell.grid_info()["row"],cell.grid_info()["column"]
+    cellval=cell.cget("text")
+    cnt=0
+    if cellval not in " x8":
+        if r!=0 and c!=0:
+            if label_matrix[r-1][c-1].cget("text")=="F":
+                cnt+=1
+        if c!=gwidth-1:
+            if label_matrix[r][c+1].cget("text")=="F":
+                cnt+=1
+        if r!=gheight-1 and c!=0:
+            if label_matrix[r+1][c-1].cget("text")=="F":
+                cnt+=1
+        if r!=0:
+            if label_matrix[r-1][c].cget("text")=="F":
+                cnt+=1
+        if r!=gheight-1 and c!=gwidth-1:
+            if label_matrix[r+1][c+1].cget("text")=="F":
+                cnt+=1
+        if c!=0:
+            if label_matrix[r][c-1].cget("text")=="F":
+                cnt+=1
+        if r!=0 and c!=gwidth-1:
+            if label_matrix[r-1][c+1].cget("text")=="F":
+                cnt+=1
+        if r!=gheight-1:
+            if label_matrix[r+1][c].cget("text")=="F":
+                cnt+=1
+    if cellval==str(cnt):
+        if r!=0 and c!=0:
+            if label_matrix[r-1][c-1].cget("relief")!=FLAT and label_matrix[r-1][c-1].cget("text")!="F":
+                leftclick(label_matrix[r-1][c-1])
+        if c!=gwidth-1:
+            if label_matrix[r][c+1].cget("relief")!=FLAT and label_matrix[r][c+1].cget("text")!="F":
+                leftclick(label_matrix[r][c+1])
+        if r!=gheight-1 and c!=0:
+            if label_matrix[r+1][c-1].cget("relief")!=FLAT and label_matrix[r+1][c-1].cget("text")!="F":
+                leftclick(label_matrix[r+1][c-1])        
+        if r!=0:
+            if label_matrix[r-1][c].cget("relief")!=FLAT and label_matrix[r-1][c].cget("text")!="F":
+                leftclick(label_matrix[r-1][c])
+        if r!=gheight-1 and c!=gwidth-1:
+            if label_matrix[r+1][c+1].cget("relief")!=FLAT and label_matrix[r+1][c+1].cget("text")!="F":
+                leftclick(label_matrix[r+1][c+1])        
+        if c!=0:
+            if label_matrix[r][c-1].cget("relief")!=FLAT and label_matrix[r][c-1].cget("text")!="F":
+                leftclick(label_matrix[r][c-1])
+        if r!=0 and c!=gwidth-1:
+            if label_matrix[r-1][c+1].cget("relief")!=FLAT and label_matrix[r-1][c+1].cget("text")!="F":
+                leftclick(label_matrix[r-1][c+1])        
+        if r!=gheight-1:
+            if label_matrix[r+1][c].cget("relief")!=FLAT and label_matrix[r+1][c].cget("text")!="F":
+                leftclick(label_matrix[r+1][c])
+        
+def settings():
+    return
+def newgame():
+    return
+def gameend():
+    return
+def stats():
+    return
 
 window=Tk()
+
+menubar= Menu(window)
+window.config(menu=menubar)
+filemenu= Menu(menubar,tearoff=0)
+menubar.add_cascade(label="Game",menu=filemenu) #-> dropdown is cascade
+filemenu.add_command(label="Settings",command=settings)
+filemenu.add_command(label="New Game",command=newgame)
+filemenu.add_command(label="Stats",command=stats)
+filemenu.add_separator() # -----------------
+filemenu.add_command(label="Exit",command=quit)
 
 window.title("Minesweeper")
 icon=PhotoImage(file="minesweeper_mine.png")
@@ -137,6 +212,7 @@ for i in range(gheight):
     for j in range(gwidth):
         cell=Label(gameframe,padx=6,text=" ",font=("Courier New",13,"bold"),bd=4,bg="#c0c0c0",relief=RAISED)
         cell.bind("<ButtonRelease-1>",leftclick)
+        cell.bind("<ButtonRelease-2>",middleclick)
         cell.bind("<ButtonRelease-3>",rightclick)
         cell.grid(row=i,column=j)
         label_matrix[i][j] = cell
